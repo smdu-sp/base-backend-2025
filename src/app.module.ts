@@ -3,6 +3,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { FolhasModule } from './folha/folha.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { RoleGuard } from './auth/guards/role.guard';
@@ -10,7 +11,7 @@ import { RoleGuard } from './auth/guards/role.guard';
 @Global()
 @Module({
   exports: [AppService],
-  imports: [PrismaModule, AuthModule, UsuariosModule],
+  imports: [PrismaModule, AuthModule, UsuariosModule, FolhasModule],
   providers: [AppService,
     {
       provide: APP_GUARD,
@@ -22,4 +23,4 @@ import { RoleGuard } from './auth/guards/role.guard';
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }
