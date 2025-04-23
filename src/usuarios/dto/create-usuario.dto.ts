@@ -1,9 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { $Enums } from '@prisma/client';
 import {
+  IsBoolean,
   IsEmail,
   IsEnum,
   IsNumber,
+  IsOptional,
   IsString,
   MinLength,
 } from 'class-validator';
@@ -15,6 +17,7 @@ export class CreateUsuarioDto {
   nome: string;
 
   @ApiProperty({ description: 'Nome social com ao menos 10 caracteres.' })
+  @IsOptional()
   @MinLength(10, { message: 'Nome social tem de ter ao menos 10 caracteres.' })
   @IsString({ message: 'Tem de ser texto.' })
   nomeSocial?: string;
@@ -33,10 +36,13 @@ export class CreateUsuarioDto {
   @IsEnum($Enums.Permissao, { message: 'Escolha uma permissão válida.' })
   permissao?: $Enums.Permissao;
 
-  @IsNumber({}, { message: 'Status inválido!' })
+  @ApiProperty({ description: 'Status do usuário' })
+  @IsBoolean({ message: 'Status inválido!' })
+  @IsOptional()
   status?: boolean;
 
   @ApiProperty({ description: 'URL para Avatar de Usuário' })
+  @IsOptional()
   @IsString({ message: 'Tem de ser texto.' })
   avatar?: string;
 }
